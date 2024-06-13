@@ -25,6 +25,9 @@ const ThemeProvider = ({ children }) => {
 	//state to store results fetched from api
 	let [results, setResults] = useState(null);
 
+	//state  to store prev searched term
+	let [prevTerm, setPrevTerm] = useState("");
+
 	//state to store loading state
 	let [loading, setLoading] = useState(true);
 
@@ -59,6 +62,8 @@ const ThemeProvider = ({ children }) => {
 		toggleInstructionTab,
 		instructionId,
 		setInstructionId,
+		prevTerm,
+		setPrevTerm,
 	};
 
 	return (

@@ -2,6 +2,7 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { useContext } from "react";
 import { ThemeContext } from "./ThemeProvider";
 const SearchResultsCard = ({ imgUrl, heading, id }) => {
+	//values from contextAPI  store
 	let { theme, toggleInstructionTab, setInstructionId } = useContext(ThemeContext);
 
 	return (
@@ -15,9 +16,9 @@ const SearchResultsCard = ({ imgUrl, heading, id }) => {
 				src={imgUrl}
 				alt={`${heading}img`}
 			/>
-			<p className='text-[1.4rem] font-bold'>{heading}</p>
+			<p className='text-[1.2rem] md:text-[1.8rem] lg:text-[1.2rem] font-bold'>{heading}</p>
 			<button
-				className={`bg-LPC text-black w-[50%] p-2 mx-auto text-[1.2rem] font-semibold rounded-md hover:cursor-pointer flex items-center justify-center gap-1`}
+				className={`bg-LPC text-black w-[50%] p-2 md:p-4 mx-auto text-[1.2rem] md:text-[1.4rem] lg:text-[1.2rem] font-semibold rounded-md hover:cursor-pointer flex items-center justify-center gap-1`}
 			>
 				<p
 					onClick={() => {
