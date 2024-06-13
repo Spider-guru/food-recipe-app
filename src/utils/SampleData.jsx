@@ -1,3 +1,7 @@
+//The  following are sample datas which cn be used or referenced when building the project
+
+//This is significan seeemingly because the api calls are limited hence the need to reduce the request sent and ensure fluidity and correctness when designing the project
+
 export let sampleInstruction = {
 	vegetarian: false,
 	vegan: false,
