@@ -9,10 +9,8 @@ const SearchResults = () => {
 	const parentVariants = {
 		initial: { opacity: 1 },
 		animate: {
-			// opacity: 1,
 			transition: {
 				staggerChildren: 0.1, // adjust this value to control the delay between children animations
-				// delayChildren: 0.1, // delay before the first child starts animating
 			},
 		},
 	};
