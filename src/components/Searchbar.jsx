@@ -3,26 +3,17 @@ import { BiSearch } from "react-icons/bi";
 import { fetchData } from "../utils/FetchData";
 import { useContext } from "react";
 import { ThemeContext } from "./ThemeProvider";
-import { useEffect } from "react";
 
 const Searchbar = () => {
 	let [query, setQuery] = useState("");
-	let { theme, setResults, setErr, setLoading, err, results, setPrevTerm } =
-		useContext(ThemeContext);
+	let { theme, setResults, setErr, setLoading, err, setPrevTerm } = useContext(ThemeContext);
+
+	//function to fetch query from database
 	let searchTerm = (term) => {
 		setPrevTerm((p) => (p = term));
 		fetchData(term, setLoading, setErr, setResults, err);
 	};
 
-	useEffect(() => {
-		let test = "pasta";
-		setPrevTerm((p) => (p = test));
-		fetchData(test, setLoading, setErr, setResults);
-	}, []);
-
-	// useEffect(() => {
-	// 	console.info(results);
-	// }, [results]);
 	return (
 		<form
 			onSubmit={(e) => {

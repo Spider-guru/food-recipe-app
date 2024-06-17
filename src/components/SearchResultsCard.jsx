@@ -1,12 +1,19 @@
 import { IoIosArrowDropright } from "react-icons/io";
 import { useContext } from "react";
 import { ThemeContext } from "./ThemeProvider";
+import { motion } from "framer-motion";
 const SearchResultsCard = ({ imgUrl, heading, id }) => {
 	//values from contextAPI  store
 	let { theme, toggleInstructionTab, setInstructionId } = useContext(ThemeContext);
 
+	const childVariants = {
+		initial: { opacity: 0, y: 999 },
+		animate: { opacity: 1, y: 0 },
+	};
+
 	return (
-		<div
+		<motion.div
+			variants={childVariants}
 			className={`rounded-lg ${
 				theme == "light" ? "bg-LSC" : "bg-DSC"
 			} p-4 text-white flex flex-col gap-6 font-monts`}
@@ -33,7 +40,7 @@ const SearchResultsCard = ({ imgUrl, heading, id }) => {
 					className={`block text-[2rem] font-bold  ${theme == "light" ? "text-LSC" : "text-DSC"}  `}
 				/>
 			</button>
-		</div>
+		</motion.div>
 	);
 };
 

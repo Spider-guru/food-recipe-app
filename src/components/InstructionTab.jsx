@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { fetchInstruction } from "../utils/FetchData";
 import { useState } from "react";
 import Footer from "./Footer";
+import { motion } from "framer-motion";
 
 const InstructionTab = ({ foodId }) => {
 	//variables(states)
@@ -14,7 +15,15 @@ const InstructionTab = ({ foodId }) => {
 	let [instrucErr, setInstrucErr] = useState(false);
 	let [instruction, setInstruction] = useState(null);
 	let [isInstrucLoading, setIsInstrucLoading] = useState(true);
-
+	let springTransition = {
+		type: "spring",
+		stiffness: 100,
+		damping: 10,
+		mass: 1,
+		velocity: 2,
+		restDelta: 0.01,
+		restSpeed: 0.01,
+	};
 	//mini-components
 	let Ingredients = ({ img, name, amount }) => {
 		return (
@@ -68,7 +77,6 @@ const InstructionTab = ({ foodId }) => {
 		}
 	}, []);
 
-
 	useEffect(() => {
 		if (instruction !== null) {
 			setIsInstrucLoading((p) => (p = false));
@@ -88,7 +96,11 @@ const InstructionTab = ({ foodId }) => {
 		);
 	}
 	return (
-		<div
+		<motion.div
+			initial={{ opacity: 0, x: -999 }}
+			animate={{ opacity: 1, x: 0 }}
+			transition={springTransition}
+			exit={{ opacity: 0 }}
 			className={` h-[94dvh] lg:h-[92dvh] bottom-[0px] w-full fixed overflow-auto scroll-smooth ${
 				theme == "light" ? "bg-LPC text-black" : "bg-DPC text-white"
 			} font-monts`}
@@ -189,7 +201,7 @@ const InstructionTab = ({ foodId }) => {
 					<Footer />
 				</div>
 			)}
-		</div>
+		</motion.div>
 	);
 };
 

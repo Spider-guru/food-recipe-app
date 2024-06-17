@@ -1,11 +1,21 @@
 import { useContext } from "react";
 import { ThemeContext } from "./ThemeProvider";
-import infinityBlack from "../assets/InfinityBlue.svg";
-import infinityGreen from "../assets/InfinityGreen.svg";
 import SearchResultsCard from "./SearchResultsCard";
+import { motion } from "framer-motion";
 
 const SearchResults = () => {
 	let { results, theme, err, prevTerm } = useContext(ThemeContext);
+
+	const parentVariants = {
+		initial: { opacity: 1 },
+		animate: {
+			// opacity: 1,
+			transition: {
+				staggerChildren: 0.1, // adjust this value to control the delay between children animations
+				// delayChildren: 0.1, // delay before the first child starts animating
+			},
+		},
+	};
 
 	//component to render if user searched for term not available in api
 	let EmptyResComponent = ({ term }) => {
@@ -48,37 +58,55 @@ const SearchResults = () => {
 			</div>
 		);
 	}
-	if (results == null) {
+	// if (results == null) {
+	// 	return (
+	// 		<div className=' border-black w-[95%] mx-auto mt-5 h-[82%] flex justify-center items-center '>
+	// 			<img
+	// 				src={theme == "light" ? infinityGreen : infinityBlack}
+	// 				alt=''
+	// 			/>
+	// 		</div>
+	// 	);
+	// }
+
+	if (results !== null) {
 		return (
-			<div className=' border-black w-[95%] mx-auto mt-5 h-[82%] flex justify-center items-center '>
-				<img
-					src={theme == "light" ? infinityGreen : infinityBlack}
-					alt=''
-				/>
+			<motion.div
+				initial='initial'
+				animate='animate'
+				variants={parentVariants}
+				className={`border-black w-[95%] mx-auto mt-5 flex justify-evenly flex-col gap-8 py-4 ${
+					results.totalResults == 0 ? "" : "md:grid"
+				} md:grid-cols-2 lg:grid-cols-4 `}
+			>
+				{results.results.length == 0 ? (
+					<EmptyResComponent term={prevTerm} />
+				) : (
+					results.results.map((item) => (
+						<SearchResultsCard
+							key={item.id}
+							heading={item.title}
+							imgUrl={item.image}
+							id={item.id}
+						/>
+					))
+				)}
+			</motion.div>
+		);
+	} else {
+		return (
+			<div
+				className={`${
+					theme == "light" ? "bg-LSC" : "bg-DSC"
+				} text-white h-[30dvh] w-[90%] mx-auto flex justify-center items-center p-4 mt-8 rounded-lg text-[1.2rem]`}
+			>
+				<p className='text-start'>
+					Type the name of the food you are interested in and hit enter, the app will search
+					throught the database and render a list of cusines related to the term you wrote
+				</p>
 			</div>
 		);
 	}
-
-	return (
-		<div
-			className={`border-black w-[95%] mx-auto mt-5 flex justify-evenly flex-col gap-8 py-4 ${
-				results.totalResults == 0 ? "" : "md:grid"
-			} md:grid-cols-2 lg:grid-cols-4 `}
-		>
-			{results.results.length == 0 ? (
-				<EmptyResComponent term={prevTerm} />
-			) : (
-				results.results.map((item) => (
-					<SearchResultsCard
-						key={item.id}
-						heading={item.title}
-						imgUrl={item.image}
-						id={item.id}
-					/>
-				))
-			)}
-		</div>
-	);
 };
 
 export default SearchResults;
