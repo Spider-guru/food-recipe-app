@@ -72,16 +72,14 @@ const InstructionTab = ({ foodId }) => {
 
 	// useEffects to carry out operation on component mount
 	useEffect(() => {
-		if (instruction == null) {
-			fetchInstruction(foodId, setInstruction, setInstrucErr);
-		}
+		fetchInstruction(foodId, setInstruction, setInstrucErr);
 	}, []);
 
 	useEffect(() => {
 		if (instruction !== null) {
 			setIsInstrucLoading((p) => (p = false));
+			console.log(instruction);
 		}
-		return () => console.log("hey");
 	}, [instruction]);
 
 	if (instrucErr) {
@@ -113,7 +111,10 @@ const InstructionTab = ({ foodId }) => {
 				}`}
 			>
 				<FiArrowLeft
-					onClick={() => toggleInstructionTab()}
+					onClick={() => {
+						toggleInstructionTab();
+						setInstruction((p) => (p = null));
+					}}
 					className={`w-[15%] h-full p-2 rounded-md ${
 						theme == "light" ? "hover:bg-LSC" : "hover:bg-DSC"
 					}`}
@@ -177,7 +178,7 @@ const InstructionTab = ({ foodId }) => {
 									amount={item.original}
 									img={item.image}
 									name={item.name}
-									key={item.id}
+									key={Math.random()*Math.random()}
 								/>
 							))}
 						</div>

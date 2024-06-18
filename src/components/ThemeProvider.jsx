@@ -40,7 +40,6 @@ const ThemeProvider = ({ children }) => {
 	//function to toggle instruction tab state
 	let toggleInstructionTab = () => {
 		setIsIntrucTabOPen((p) => (p = !p));
-		console.info(isInstrucTabOpen);
 	};
 
 	//state to store id needed to fetch instruction	NB:delete later not needed
