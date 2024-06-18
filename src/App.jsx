@@ -5,6 +5,7 @@ import Searchbar from "./components/Searchbar";
 import SearchResults from "./components/SearchResults";
 import InstructionTab from "./components/InstructionTab";
 import Footer from "./components/Footer";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
 	let { theme, isInstrucTabOpen, instructionId } = useContext(ThemeContext);
@@ -18,11 +19,12 @@ function App() {
 			<Header />
 			<Searchbar />
 			<SearchResults />
-			{isInstrucTabOpen && <InstructionTab foodId={instructionId} />}
+			<AnimatePresence>
+				{isInstrucTabOpen && <InstructionTab foodId={instructionId} />}
+			</AnimatePresence>
 			<Footer />
 		</div>
 	);
 }
 
 export default App;
-

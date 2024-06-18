@@ -11,6 +11,16 @@ const SearchResultsCard = ({ imgUrl, heading, id }) => {
 		animate: { opacity: 1, y: 0 },
 	};
 
+	let springTransition = {
+		type: "spring",
+		stiffness: 100,
+		damping: 5,
+		mass: 1,
+		velocity: 2,
+		restDelta: 0.01,
+		restSpeed: 0.01,
+	};
+
 	return (
 		<motion.div
 			variants={childVariants}
@@ -24,22 +34,20 @@ const SearchResultsCard = ({ imgUrl, heading, id }) => {
 				alt={`${heading}img`}
 			/>
 			<p className='text-[1.2rem] md:text-[1.8rem] lg:text-[1.2rem] font-bold'>{heading}</p>
-			<button
+			<motion.button
+				whileHover={{ scale: 1.05 }}
+				transition={springTransition}
+				onClick={() => {
+					setInstructionId((p) => (p = id));
+					toggleInstructionTab();
+				}}
 				className={`bg-LPC text-black w-[50%] p-2 md:p-4 mx-auto text-[1.2rem] md:text-[1.4rem] lg:text-[1.2rem] font-semibold rounded-md hover:cursor-pointer flex items-center justify-center gap-1`}
 			>
-				<p
-					onClick={() => {
-						setInstructionId((p) => (p = id));
-						toggleInstructionTab();
-					}}
-					className='block'
-				>
-					Steps
-				</p>
+				<p className='block'>Steps</p>
 				<IoIosArrowDropright
 					className={`block text-[2rem] font-bold  ${theme == "light" ? "text-LSC" : "text-DSC"}  `}
 				/>
-			</button>
+			</motion.button>
 		</motion.div>
 	);
 };

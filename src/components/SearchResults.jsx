@@ -100,7 +100,7 @@ const SearchResults = () => {
 			>
 				<p className='text-start'>
 					Type the name of the food you are interested in and hit enter, the app will search
-					throught the database and render a list of cusines related to the term you wrote
+					throught the database and render a list of cuisines related to the term you wrote
 				</p>
 			</div>
 		);

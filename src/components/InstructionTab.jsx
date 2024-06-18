@@ -100,7 +100,7 @@ const InstructionTab = ({ foodId }) => {
 			initial={{ opacity: 0, x: -999 }}
 			animate={{ opacity: 1, x: 0 }}
 			transition={springTransition}
-			exit={{ opacity: 0 }}
+			exit={{ opacity: 0, x: -999 }}
 			className={` h-[94dvh] lg:h-[92dvh] bottom-[0px] w-full fixed overflow-auto scroll-smooth ${
 				theme == "light" ? "bg-LPC text-black" : "bg-DPC text-white"
 			} font-monts`}
